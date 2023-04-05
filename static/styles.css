@@ -3,6 +3,42 @@ body {
     max-width: 960px;
     margin: 0 auto;
     padding: 20px;
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.book {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('book.gif');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 80vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.column {
+    flex: 1;
+    position: absolute;
+    text-align: center;
+}
+
+.column.today {
+    left: 20%;
+}
+
+.column.tomorrow {
+    right: 20%;
+}
+
+.tomorrow-tasks {
+    right: 5%;
 }
 
 .container {
@@ -14,3 +50,17 @@ body {
 .column {
     flex: 1;
 }
+
+.today-tasks,
+.tomorrow-tasks {
+    position: absolute;
+    width: 45%;
+    top: 20%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.today-tasks {
+    left: 5%;
+}
+

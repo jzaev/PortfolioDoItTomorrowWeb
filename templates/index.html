@@ -3,48 +3,47 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="column">
-            <h2>Today's Tasks</h2>
-            <table id="today-tasks">
-                {% for task in today_tasks %}
-                    <tr>
-                        <td>{{ task.task }}</td>
-                        <td>{{ task.due_date }}</td>
-                    </tr>
-                {% endfor %}
+<div class="book">
+    <div class="column today">
+        <h2>Today's Tasks</h2>
+        <table id="today-tasks">
+            {% for task in today_tasks %}
+                <tr>
+                    <td>{{ task.task }}</td>
+                    <td>{{ task.due_date }}</td>
+                </tr>
+            {% endfor %}
+        </table>
 
-            </table>
-
-            <h3>Add Today's Task</h3>
-            <form action="/add-task" method="post">
-                <input type="hidden" name="due_date" value="{{ today }}">
-                <label for="task_today">Task:</label>
-                <input type="text" name="task_today">
-                <br>
-                <input type="submit" value="Add Task">
-            </form>
-        </div>
-
-        <div class="column">
-            <h2>Tomorrow's Tasks</h2>
-            <table id="tomorrow-tasks">
-                {% for task in tomorrow_tasks %}
-                    <tr>
-                        <td>{{ task.task }}</td>
-                        <td>{{ task.due_date }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-
-            <h3>Add Tomorrow's Task</h3>
-            <form action="/add-task" method="post">
-                <input type="hidden" name="due_date" value="{{ tomorrow }}">
-                <label for="task_tomorrow">Task:</label>
-                <input type="text" name="task_tomorrow">
-                <br>
-                <input type="submit" value="Add Task">
-            </form>
-        </div>
+        <h3>Add Today's Task</h3>
+        <form action="/add-task" method="post">
+            <input type="hidden" name="due_date" value="{{ today }}">
+            <label for="task_today">Task:</label>
+            <input type="text" name="task_today">
+            <br>
+            <input type="submit" value="Add Task">
+        </form>
     </div>
+
+    <div class="column tomorrow">
+        <h2>Tomorrow's Tasks</h2>
+        <table id="tomorrow-tasks">
+            {% for task in tomorrow_tasks %}
+                <tr>
+                    <td>{{ task.task }}</td>
+                    <td>{{ task.due_date }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h3>Add Tomorrow's Task</h3>
+        <form action="/add-task" method="post">
+            <input type="hidden" name="due_date" value="{{ tomorrow }}">
+            <label for="task_tomorrow">Task:</label>
+            <input type="text" name="task_tomorrow">
+            <br>
+            <input type="submit" value="Add Task">
+        </form>
+    </div>
+</div>
 {% endblock %}
