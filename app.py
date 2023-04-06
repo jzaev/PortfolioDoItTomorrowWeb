@@ -53,5 +53,18 @@ class Task(db.Model):
         self.due_date = due_date
 
 
+def check_and_update_tasks():
+    today = date.today()
+    tasks_before_today = Task.query.filter(Task.due_date < today).all()
+
+    for task in tasks_before_today:
+        task.due_date = today
+        db.session.add(task)
+
+    db.session.commit()
+
+
 if __name__ == '__main__':
+    with app.app_context():
+        check_and_update_tasks()
     app.run(debug=True)

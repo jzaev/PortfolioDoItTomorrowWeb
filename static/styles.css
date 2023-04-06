@@ -1,13 +1,30 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Dancing Script', cursive;
     max-width: 960px;
     margin: 0 auto;
     padding: 20px;
     background-image: url('background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    font-size: 1.5rem;
 }
 
+header {
+    text-align: center;
+}
+
+.field_new_task{
+    width: 350px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+}
+
+.field_new_task::placeholder {
+    font-size: 2rem;
+}
 
 .book {
     position: relative;
@@ -26,41 +43,33 @@ body {
 .column {
     flex: 1;
     position: absolute;
-    text-align: center;
+    text-align: left;
+    top: 5%;
 }
 
 .column.today {
-    left: 20%;
+    left: 7%;
 }
 
 .column.tomorrow {
-    right: 20%;
-}
-
-.tomorrow-tasks {
-    right: 5%;
-}
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.column {
-    flex: 1;
+    right: 10%;
 }
 
 .today-tasks,
 .tomorrow-tasks {
     position: absolute;
     width: 45%;
-    top: 20%;
     padding: 10px;
     box-sizing: border-box;
 }
 
 .today-tasks {
     left: 5%;
+
 }
 
+.task-cell {
+    border-bottom: 1px solid gray;
+    height: 30px;
+    width: 350px;
+}
