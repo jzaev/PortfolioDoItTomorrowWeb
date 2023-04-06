@@ -18,7 +18,23 @@
             {% for i in range(12) %}
                 <tr>
                     <td class="task-cell">
-                        {% if i < today_tasks|length %}{{ today_tasks[i].task }}{% endif %}
+                            {% if i < today_tasks|length %}
+                                <form action="/toggle-task-completion/{{ today_tasks[i].id }}" method="post">
+                                    <input type="hidden" name="task_id" value="{{ today_tasks[i].id }}">
+                                    <span {% if today_tasks[i].completed %}class="completed"{% endif %}>
+                                        {{ today_tasks[i].task }}
+                                        <button class="delete-task" data-id="{{ today_tasks[i].id }}" type="button">Delete</button>
+                                        <button class="move-task" data-id="{{ today_tasks[i].id }}" type="button">Move</button>
+                                    </span>
+                                </form>
+                            {% endif %}
+
+<!--                         {% if i < today_tasks|length %}-->
+<!--                            <form action="/toggle-task-completion/{{ today_tasks[i].id }}" method="post">-->
+<!--                                <input type="hidden" name="task_id" value="{{ today_tasks[i].id }}">-->
+<!--                                <span {% if today_tasks[i].completed %}class="completed"{% endif %}>{{ today_tasks[i].task }}</span>-->
+<!--                            </form>-->
+<!--                         {% endif %}-->
                     </td>
                 </tr>
             {% endfor %}
@@ -41,7 +57,24 @@
             {% for i in range(12) %}
                 <tr>
                     <td class="task-cell">
-                        {% if i < tomorrow_tasks|length %}{{ tomorrow_tasks[i].task }}{% endif %}
+                            {% if i < tomorrow_tasks|length %}
+                                <form action="/toggle-task-completion/{{ tomorrow_tasks[i].id }}" method="post">
+                                    <input type="hidden" name="task_id" value="{{ tomorrow_tasks[i].id }}">
+                                    <span {% if tomorrow_tasks[i].completed %}class="completed"{% endif %}>
+                                        {{ tomorrow_tasks[i].task }}
+                                        <button class="delete-task" data-id="{{ tomorrow_tasks[i].id }}" type="button">Delete</button>
+                                        <button class="move-task" data-id="{{ tomorrow_tasks[i].id }}" type="button">Move</button>
+                                    </span>
+                                </form>
+                            {% endif %}
+
+
+<!--                      {% if i < tomorrow_tasks|length %}-->
+<!--                        <form action="/toggle-task-completion/{{ tomorrow_tasks[i].id }}" method="post">-->
+<!--                            <input type="hidden" name="task_id" value="{{ tomorrow_tasks[i].id }}">-->
+<!--                            <span {% if tomorrow_tasks[i].completed %}class="completed"{% endif %}>{{ tomorrow_tasks[i].task }}</span>-->
+<!--                        </form>-->
+<!--                      {% endif %}-->
                     </td>
                 </tr>
             {% endfor %}
@@ -50,4 +83,30 @@
 
     </div>
 </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    document.querySelectorAll('.task-cell').forEach(cell => {
+        cell.addEventListener('click', () => {
+            cell.querySelector('form').submit();
+        });
+    });
+    document.querySelectorAll('.delete-task').forEach(button => {
+        button.addEventListener('click', function(event) {
+            const taskId = event.target.dataset.id;
+            // Send a request to delete the task with the given ID.
+        });
+    });
+
+    document.querySelectorAll('.move-task').forEach(button => {
+        button.addEventListener('click', function(event) {
+            const taskId = event.target.dataset.id;
+            // Send a request to move the task with the given ID to the other table.
+        });
+    });
+</script>
+
 {% endblock %}

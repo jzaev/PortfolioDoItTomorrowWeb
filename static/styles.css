@@ -9,6 +9,10 @@ body {
     font-size: 1.5rem;
 }
 
+.completed {
+    text-decoration: line-through;
+}
+
 header {
     text-align: center;
 }

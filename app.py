@@ -41,21 +41,31 @@ def add_task():
 
     return redirect(url_for('index'))
 
+@app.route('/toggle-task-completion/<int:task_id>', methods=['POST'])
+def toggle_task_completion(task_id):
+    task = Task.query.get(task_id)
+    if task:
+        task.completed = not task.completed
+        db.session.commit()
+
+    return redirect(url_for('index'))
 
 
 class Task(db.Model):
     id = Column(Integer, primary_key=True)
     task = Column(String(255), nullable=False)
     due_date = Column(Date, nullable=False)
+    completed = Column(db.Boolean, default=False, nullable=False)
 
     def __init__(self, task, due_date):
         self.task = task
         self.due_date = due_date
+        self.completed = False
 
 
 def check_and_update_tasks():
     today = date.today()
-    tasks_before_today = Task.query.filter(Task.due_date < today).all()
+    tasks_before_today = Task.query.filter(Task.due_date < today, Task.completed == False).all()
 
     for task in tasks_before_today:
         task.due_date = today
