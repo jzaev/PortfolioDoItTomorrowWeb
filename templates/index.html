@@ -94,19 +94,38 @@
             cell.querySelector('form').submit();
         });
     });
-    document.querySelectorAll('.delete-task').forEach(button => {
-        button.addEventListener('click', function(event) {
-            const taskId = event.target.dataset.id;
-            // Send a request to delete the task with the given ID.
-        });
+document.querySelectorAll('.delete-task').forEach(button => {
+    button.addEventListener('click', function(event) {
+        event.stopPropagation();
+        const taskId = event.target.dataset.id;
+        // Send a request to delete the task with the given ID.
+        fetch(`/delete-task/${taskId}`, { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Error: Could not delete task.');
+                }
+            });
     });
+});
 
-    document.querySelectorAll('.move-task').forEach(button => {
-        button.addEventListener('click', function(event) {
-            const taskId = event.target.dataset.id;
-            // Send a request to move the task with the given ID to the other table.
-        });
+document.querySelectorAll('.move-task').forEach(button => {
+    button.addEventListener('click', function(event) {
+        event.stopPropagation();
+        const taskId = event.target.dataset.id;
+        // Send a request to move the task with the given ID to the other table.
+        fetch(`/move-task/${taskId}`, { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Error: Could not move task.');
+                }
+            });
     });
+});
+
 </script>
 
 {% endblock %}
