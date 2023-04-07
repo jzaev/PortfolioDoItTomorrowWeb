@@ -147,3 +147,23 @@ header {
 .field_new_task::placeholder {
     font-size: 2rem;
 }
+
+.text-left{
+    text-align: left;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.date-page{
+    margin-top:5%;
+    color: #666;
+    font-weight: normal;
+    margin-bottom:0px;
+}
+
+.date-title{
+    margin-top:0px;
+    text-align: center;
+}

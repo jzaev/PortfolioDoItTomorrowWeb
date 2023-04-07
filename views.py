@@ -22,7 +22,15 @@ def index():
     today_tasks = Task.query.filter_by(due_date=today).all()
     tomorrow_tasks = Task.query.filter_by(due_date=tomorrow).all()
 
-    return render_template('index.html', today_tasks=today_tasks, tomorrow_tasks=tomorrow_tasks)
+    month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+                   'November', 'December']
+    return render_template('index.html',
+                           today=today,
+                           tomorrow=tomorrow,
+                           today_tasks=today_tasks,
+                           tomorrow_tasks=tomorrow_tasks,
+                           date=date,
+                           month_names=month_names)
 
 
 # Add task route - Handles the addition of a new task to either today or tomorrow's list

@@ -8,7 +8,10 @@
         <a href="{{ url_for('help_page') }}" class="help-link">Help >></a>
     </div>
     <div class="column today">
-        <h2>Today</h2>
+
+        <h4 class="date-page text-left">{{ today.day }} {{ month_names[today.month - 1] }}</h4>
+        <h2 class="date-title">Today</h2>
+
         <form action="/add-task" method="post">
             <input type="hidden" name="due_date" value="{{ today }}">
             <input class="field_new_task" type="text" name="task_today" placeholder="+ Add task">
@@ -43,7 +46,8 @@
     </div>
 
     <div class="column tomorrow">
-        <h2>Tomorrow</h2>
+        <h4 class="date-page text-right">{{ tomorrow.day }} {{ month_names[tomorrow.month - 1] }}</h4>
+        <h2 class="date-title">Tomorrow</h2>
         <form action="/add-task" method="post">
             <input type="hidden" name="due_date" value="{{ tomorrow }}">
             <input class="field_new_task" type="text" name="task_tomorrow" placeholder="+ Add task">
