@@ -5,14 +5,16 @@ from utils import check_and_update_tasks
 from models import Task
 
 
+# Help page route
 @app.route('/help')
 def help_page():
     return render_template('help.html')
 
 
+# Index route - Displays the main page with tasks for today and tomorrow
 @app.route('/')
 def index():
-    check_and_update_tasks()
+    check_and_update_tasks()  # Check tasks and move they to today also delete finished
 
     today = date.today()
     tomorrow = today + timedelta(days=1)
@@ -23,6 +25,7 @@ def index():
     return render_template('index.html', today_tasks=today_tasks, tomorrow_tasks=tomorrow_tasks)
 
 
+# Add task route - Handles the addition of a new task to either today or tomorrow's list
 @app.route('/add-task', methods=['POST'])
 def add_task():
     if request.form.get('task_today'):
@@ -40,6 +43,7 @@ def add_task():
     return redirect(url_for('index'))
 
 
+# Toggle task completion route - Toggles the completion status of a task
 @app.route('/toggle-task-completion/<int:task_id>', methods=['POST'])
 def toggle_task_completion(task_id):
     task = Task.query.get(task_id)
@@ -50,6 +54,7 @@ def toggle_task_completion(task_id):
     return redirect(url_for('index'))
 
 
+# Delete task route - Deletes a task based on its ID
 @app.route('/delete-task/<int:task_id>', methods=['POST'])
 def delete_task(task_id):
     task = Task.query.get_or_404(task_id)
@@ -58,6 +63,7 @@ def delete_task(task_id):
     return redirect(url_for('index'))
 
 
+# Move task route - Moves a task between today and tomorrow's list based on its ID
 @app.route('/move-task/<int:task_id>', methods=['POST'])
 def move_task(task_id):
     task = Task.query.get_or_404(task_id)

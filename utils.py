@@ -6,6 +6,7 @@ from app import db
 def check_and_update_tasks():
     today = date.today()
 
+    # Make first row if needed
     last_check_date = LastCheckDate.query.first()
     if last_check_date is None:
         new_date = LastCheckDate(today)
@@ -14,10 +15,6 @@ def check_and_update_tasks():
         last_check_date = LastCheckDate.query.first()
 
     if last_check_date.check_date != today:
-
-        # TODO Translate all comments
-        # TODO help
-        # TODO Do css flexible
 
         # Delete all done tasks
         completed_tasks = Task.query.filter(Task.completed).all()
