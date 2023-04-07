@@ -13,6 +13,21 @@ body {
     text-decoration: line-through;
 }
 
+.delete-task ,
+.move-task {
+    width: 30px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.move-icon {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+}
+
 header {
     text-align: center;
 }

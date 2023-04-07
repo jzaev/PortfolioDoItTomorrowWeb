@@ -14,7 +14,7 @@
             {% for i in range(12) %}
             <tr>
                 <td class="task-cell">
-                    {% if i < today_tasks|length %}
+                    {% if today_tasks and i < today_tasks|length %}
                     <form action="/toggle-task-completion/{{ today_tasks[i].id }}" method="post">
                         <input type="hidden" name="task_id" value="{{ today_tasks[i].id }}">
                         <span {% if today_tasks[i].completed %}class="completed" {% endif %}>
@@ -24,9 +24,13 @@
                     {% endif %}
                 </td>
                 <td class="task-buttons">
-                    {% if i < today_tasks|length %}
-                    <button class="delete-task" data-id="{{ today_tasks[i].id }}" type="button">Delete</button>
-                    <button class="move-task" data-id="{{ today_tasks[i].id }}" type="button">Move</button>
+                    {% if today_tasks and i < today_tasks|length %}
+                        <button class="delete-task" data-id="{{ today_tasks[i].id }}" type="button">
+                            <img class="move-icon" src="static/delete_icon.gif" alt="Delete">
+                        </button>
+                        <button class="move-task" data-id="{{ today_tasks[i].id }}" type="button">
+                            <img class="move-icon"   src="static/to_right.gif" alt=">">
+                        </button>
                     {% endif %}
                 </td>
             </tr>
@@ -45,19 +49,24 @@
              {% for i in range(12) %}
             <tr>
                 <td class="task-cell">
-                    {% if i < tomorrow_tasks|length %}
-                    <form action="/toggle-task-completion/{{ today_tasks[i].id }}" method="post">
-                        <input type="hidden" name="task_id" value="{{ today_tasks[i].id }}">
+                     {% if tomorrow_tasks and i < tomorrow_tasks|length %}
+                    <form action="/toggle-task-completion/{{ tomorrow_tasks[i].id }}" method="post">
+                        <input type="hidden" name="task_id" value="{{ tomorrow_tasks[i].id }}">
                         <span {% if tomorrow_tasks[i].completed %}class="completed" {% endif %}>
                                     {{ tomorrow_tasks[i].task }}
                         </span>
                     </form>
                     {% endif %}
+
                 </td>
                 <td class="task-buttons">
-                    {% if i < tomorrow_tasks|length %}
-                    <button class="delete-task" data-id="{{ tomorrow_tasks[i].id }}" type="button">Delete</button>
-                    <button class="move-task" data-id="{{ tomorrow_tasks[i].id }}" type="button">Move</button>
+                    {% if tomorrow_tasks and i < tomorrow_tasks|length %}
+                       <button class="delete-task" data-id="{{ tomorrow_tasks[i].id }}" type="button">
+                            <img class="move-icon" src="static/delete_icon.gif" alt="Delete">
+                        </button>
+                        <button class="move-task" data-id="{{ tomorrow_tasks[i].id }}" type="button">
+                            <img class="move-icon"   src="static/to_left.gif" alt=">">
+                        </button>
                     {% endif %}
                 </td>
             </tr>
@@ -78,38 +87,37 @@
             cell.querySelector('form').submit();
         });
     });
-document.querySelectorAll('.delete-task').forEach(button => {
-    button.addEventListener('click', function(event) {
-        event.stopPropagation();
-        const taskId = event.target.dataset.id;
-        // Send a request to delete the task with the given ID.
-        fetch(`/delete-task/${taskId}`, { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    location.reload();
-                } else {
-                    alert('Error: Could not delete task.');
-                }
-            });
+    document.querySelectorAll('.delete-task').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.stopPropagation();
+            const taskId = event.currentTarget.dataset.id; // Измените event.target на event.currentTarget
+            // Send a request to delete the task with the given ID.
+            fetch(`/delete-task/${taskId}`, { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert('Error: Could not delete task.');
+                    }
+                });
+        });
     });
-});
 
-document.querySelectorAll('.move-task').forEach(button => {
-    button.addEventListener('click', function(event) {
-        event.stopPropagation();
-        const taskId = event.target.dataset.id;
-        // Send a request to move the task with the given ID to the other table.
-        fetch(`/move-task/${taskId}`, { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    location.reload();
-                } else {
-                    alert('Error: Could not move task.');
-                }
-            });
+    document.querySelectorAll('.move-task').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.stopPropagation();
+            const taskId = event.currentTarget.dataset.id; // Измените event.target на event.currentTarget
+            // Send a request to move the task with the given ID to the other table.
+            fetch(`/move-task/${taskId}`, { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert('Error: Could not move task.');
+                    }
+                });
+        });
     });
-});
-
 
 </script>
 
