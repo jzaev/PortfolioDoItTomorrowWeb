@@ -101,3 +101,52 @@ header {
     width: 50px
 }
 
+.book-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+}
+
+.book-header a {
+  position: absolute;
+  top: 10px;
+  color: #000;
+  text-decoration: none;
+}
+
+.book-header a:hover {
+  text-decoration: underline;
+}
+
+.book-header .home-link {
+  left: 20px;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.book-header .help-link {
+  right: 20px;
+  padding-top: 10px;
+  padding-right: 60px;
+}
+
+.page {
+    position: relative;
+    width: 40%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.page:nth-child(2) {
+    right: 5%;
+}
+
+.page .content {
+    position: absolute;
+    top: 10%;
+    width: 100%;
+
+}
+

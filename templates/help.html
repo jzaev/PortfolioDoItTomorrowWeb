@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="book">
+    <div class="book-header">
+        <a href="{{ url_for('index') }}" class="home-link"><< Main</a>
+    </div>
+    <div class="page">
+        <div class="content">
+            <h2>Помощь</h2>
+            <p>Здесь вы можете разместить информацию о том, как использовать ваше приложение, описать его функциональность и предоставить часто задаваемые вопросы и ответы.</p>
+        </div>
+    </div>
+    <div class="page">
+        <div class="content">
+            <h2>О программе и авторе</h2>
+            <p>Здесь вы можете разместить информацию об авторе, его контакты, историю создания приложения и любые другие интересные сведения.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

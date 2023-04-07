@@ -4,6 +4,9 @@
 
 {% block content %}
 <div class="book">
+    <div class="book-header">
+        <a href="{{ url_for('help_page') }}" class="help-link">Help >></a>
+    </div>
     <div class="column today">
         <h2>Today</h2>
         <form action="/add-task" method="post">

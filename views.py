@@ -5,6 +5,11 @@ from utils import check_and_update_tasks
 from models import Task
 
 
+@app.route('/help')
+def help_page():
+    return render_template('help.html')
+
+
 @app.route('/')
 def index():
     check_and_update_tasks()
