@@ -9,40 +9,8 @@ body {
     font-size: 1.5rem;
 }
 
-.completed {
-    text-decoration: line-through;
-}
-
-.delete-task ,
-.move-task {
-    width: 30px;
-    height: 30px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-}
-
-.move-icon {
-    width: 20px;
-    height: 20px;
-    background-color: transparent;
-}
-
 header {
     text-align: center;
-}
-
-.field_new_task{
-    width: 350px;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.5rem;
-}
-
-.field_new_task::placeholder {
-    font-size: 2rem;
 }
 
 .book {
@@ -57,6 +25,55 @@ header {
     height: 80vh;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.book-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+}
+
+.book-header a {
+    position: absolute;
+    top: 10px;
+    color: #000;
+    text-decoration: none;
+}
+
+.book-header a:hover {
+    text-decoration: underline;
+}
+
+.book-header .home-link {
+    left: 20px;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.book-header .help-link {
+    right: 20px;
+    padding-top: 10px;
+    padding-right: 60px;
+}
+
+.page {
+    position: absolute;
+    width: 40%;
+    top: 5%;
+    left: 5%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.page:nth-child(2) {
+    left: 55%;
+}
+
+.page .content {
+    position: relative;
+    width: 100%;
 }
 
 .column {
@@ -84,69 +101,49 @@ header {
 
 .today-tasks {
     left: 5%;
-
 }
 
 .task-cell {
     border-bottom: 1px solid gray;
     height: 30px;
     width: 300px;
-
 }
 
 .task-buttons {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    width: 50px
+    width: 50px;
 }
 
-.book-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 40px;
+.completed {
+    text-decoration: line-through;
 }
 
-.book-header a {
-  position: absolute;
-  top: 10px;
-  color: #000;
-  text-decoration: none;
+.delete-task,
+.move-task {
+    width: 30px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background-color: transparent;
 }
 
-.book-header a:hover {
-  text-decoration: underline;
+.move-icon {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
 }
 
-.book-header .home-link {
-  left: 20px;
-  padding-top: 10px;
-  padding-left: 20px;
+.field_new_task {
+    width: 350px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
 }
 
-.book-header .help-link {
-  right: 20px;
-  padding-top: 10px;
-  padding-right: 60px;
+.field_new_task::placeholder {
+    font-size: 2rem;
 }
-
-.page {
-    position: relative;
-    width: 40%;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.page:nth-child(2) {
-    right: 5%;
-}
-
-.page .content {
-    position: absolute;
-    top: 10%;
-    width: 100%;
-
-}
-
