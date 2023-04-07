@@ -6,37 +6,30 @@
 <div class="book">
     <div class="column today">
         <h2>Today</h2>
-
         <form action="/add-task" method="post">
             <input type="hidden" name="due_date" value="{{ today }}">
-<!--            <label for="task_today">Task:</label>-->
-            <input class = "field_new_task" type="text" name="task_today" placeholder="+ Add task">
-<!--            <input class = "add_button" type="submit" value="Add task" >-->
+            <input class="field_new_task" type="text" name="task_today" placeholder="+ Add task">
         </form>
-
         <table id="today-tasks">
             {% for i in range(12) %}
-                <tr>
-                    <td class="task-cell">
-                            {% if i < today_tasks|length %}
-                                <form action="/toggle-task-completion/{{ today_tasks[i].id }}" method="post">
-                                    <input type="hidden" name="task_id" value="{{ today_tasks[i].id }}">
-                                    <span {% if today_tasks[i].completed %}class="completed"{% endif %}>
-                                        {{ today_tasks[i].task }}
-                                        <button class="delete-task" data-id="{{ today_tasks[i].id }}" type="button">Delete</button>
-                                        <button class="move-task" data-id="{{ today_tasks[i].id }}" type="button">Move</button>
-                                    </span>
-                                </form>
-                            {% endif %}
-
-<!--                         {% if i < today_tasks|length %}-->
-<!--                            <form action="/toggle-task-completion/{{ today_tasks[i].id }}" method="post">-->
-<!--                                <input type="hidden" name="task_id" value="{{ today_tasks[i].id }}">-->
-<!--                                <span {% if today_tasks[i].completed %}class="completed"{% endif %}>{{ today_tasks[i].task }}</span>-->
-<!--                            </form>-->
-<!--                         {% endif %}-->
-                    </td>
-                </tr>
+            <tr>
+                <td class="task-cell">
+                    {% if i < today_tasks|length %}
+                    <form action="/toggle-task-completion/{{ today_tasks[i].id }}" method="post">
+                        <input type="hidden" name="task_id" value="{{ today_tasks[i].id }}">
+                        <span {% if today_tasks[i].completed %}class="completed" {% endif %}>
+                                    {{ today_tasks[i].task }}
+                        </span>
+                    </form>
+                    {% endif %}
+                </td>
+                <td class="task-buttons">
+                    {% if i < today_tasks|length %}
+                    <button class="delete-task" data-id="{{ today_tasks[i].id }}" type="button">Delete</button>
+                    <button class="move-task" data-id="{{ today_tasks[i].id }}" type="button">Move</button>
+                    {% endif %}
+                </td>
+            </tr>
             {% endfor %}
         </table>
 
@@ -44,39 +37,30 @@
 
     <div class="column tomorrow">
         <h2>Tomorrow</h2>
-
-<!--        <h3>Add Tomorrow's Task</h3>-->
         <form action="/add-task" method="post">
             <input type="hidden" name="due_date" value="{{ tomorrow }}">
-<!--            <label for="task_tomorrow">Task:</label>-->
-            <input class = "field_new_task" type="text" name="task_tomorrow"  placeholder="+ Add task">
-<!--            <input class = "add_button" type="submit" value="Add Task">-->
+            <input class="field_new_task" type="text" name="task_tomorrow" placeholder="+ Add task">
         </form>
-
         <table id="tomorrow-tasks">
-            {% for i in range(12) %}
-                <tr>
-                    <td class="task-cell">
-                            {% if i < tomorrow_tasks|length %}
-                                <form action="/toggle-task-completion/{{ tomorrow_tasks[i].id }}" method="post">
-                                    <input type="hidden" name="task_id" value="{{ tomorrow_tasks[i].id }}">
-                                    <span {% if tomorrow_tasks[i].completed %}class="completed"{% endif %}>
-                                        {{ tomorrow_tasks[i].task }}
-                                        <button class="delete-task" data-id="{{ tomorrow_tasks[i].id }}" type="button">Delete</button>
-                                        <button class="move-task" data-id="{{ tomorrow_tasks[i].id }}" type="button">Move</button>
-                                    </span>
-                                </form>
-                            {% endif %}
-
-
-<!--                      {% if i < tomorrow_tasks|length %}-->
-<!--                        <form action="/toggle-task-completion/{{ tomorrow_tasks[i].id }}" method="post">-->
-<!--                            <input type="hidden" name="task_id" value="{{ tomorrow_tasks[i].id }}">-->
-<!--                            <span {% if tomorrow_tasks[i].completed %}class="completed"{% endif %}>{{ tomorrow_tasks[i].task }}</span>-->
-<!--                        </form>-->
-<!--                      {% endif %}-->
-                    </td>
-                </tr>
+             {% for i in range(12) %}
+            <tr>
+                <td class="task-cell">
+                    {% if i < tomorrow_tasks|length %}
+                    <form action="/toggle-task-completion/{{ today_tasks[i].id }}" method="post">
+                        <input type="hidden" name="task_id" value="{{ today_tasks[i].id }}">
+                        <span {% if tomorrow_tasks[i].completed %}class="completed" {% endif %}>
+                                    {{ tomorrow_tasks[i].task }}
+                        </span>
+                    </form>
+                    {% endif %}
+                </td>
+                <td class="task-buttons">
+                    {% if i < tomorrow_tasks|length %}
+                    <button class="delete-task" data-id="{{ tomorrow_tasks[i].id }}" type="button">Delete</button>
+                    <button class="move-task" data-id="{{ tomorrow_tasks[i].id }}" type="button">Move</button>
+                    {% endif %}
+                </td>
+            </tr>
             {% endfor %}
         </table>
 
@@ -125,6 +109,7 @@ document.querySelectorAll('.move-task').forEach(button => {
             });
     });
 });
+
 
 </script>
 

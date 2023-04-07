@@ -75,5 +75,14 @@ header {
 .task-cell {
     border-bottom: 1px solid gray;
     height: 30px;
-    width: 350px;
+    width: 300px;
+
 }
+
+.task-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 50px
+}
+
