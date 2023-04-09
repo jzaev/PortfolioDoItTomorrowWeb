@@ -16,6 +16,8 @@ db = SQLAlchemy(app)
 
 @app.route('/')
 def index():
+    check_and_update_tasks()
+
     today = date.today()
     tomorrow = today + timedelta(days=1)
 
@@ -79,19 +81,48 @@ class Task(db.Model):
         self.due_date = due_date
         self.completed = False
 
+class LastCheckDate(db.Model):
+    id = Column(Integer, primary_key=True)
+    check_date = Column(Date, nullable=False)
+
+    def __init__(self, check_date):
+        self.check_date = check_date
+
 
 def check_and_update_tasks():
     today = date.today()
-    tasks_before_today = Task.query.filter(Task.due_date < today, Task.completed == False).all()
 
-    for task in tasks_before_today:
-        task.due_date = today
-        db.session.add(task)
+    last_check_date = LastCheckDate.query.first()
+    if last_check_date is None:
+        new_date = LastCheckDate(today)
+        db.session.add(new_date)
+        db.session.commit()
+        last_check_date = LastCheckDate.query.first()
 
-    db.session.commit()
+    if last_check_date.check_date != today:
+
+
+        # TODO Translate all comments
+        # TODO separate module
+        # TODO help
+        # TODO Do css flexible
+        # Delete all done tasks
+        completed_tasks = Task.query.filter(Task.completed == True).all()
+        for task in completed_tasks:
+            db.session.delete(task)
+
+        # all tasks move on today
+        tasks_before_today = Task.query.filter(Task.due_date < today, Task.completed == False).all()
+        for task in tasks_before_today:
+            task.due_date = today
+            db.session.add(task)
+
+        # Refresh current date on database
+        last_check_date.check_date = today
+        db.session.add(last_check_date)
+        db.session.commit()
+
 
 
 if __name__ == '__main__':
-    with app.app_context():
-        check_and_update_tasks()
     app.run(debug=True)
