@@ -1,4 +1,5 @@
 # Simple task organizer
+## This task can be considered as a portfolio work.
 
 This version is made for practicing programming in Python and for a professional portfolio
 by <a href="https://github.com/jzaev" target="_blank">Yury Zaev</a>. It does not represent any commercial interest and
